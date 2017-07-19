@@ -5,83 +5,74 @@ class FieldConfigurator
 
     # Defines what fields are shown on the search index view for each item
     def index_fields
-      get_fields(:index)
+      field_hash([:resource_type, :creator, :keyword, :subject, :language,
+                  :based_near, :publisher, :has_model, :date_uploaded])
     end
 
     # Defines what fields are shown on the work show page
-    def show_fields
-      get_fields(:show)
+    def search_fields
+      field_hash([:resource_type, :creator, :keyword, :subject, :language,
+                  :based_near, :publisher, :date_uploaded, :depositor,
+                  :contributor, :date_modified, :date_created, :rights,
+                  :identifier, :description, :title, :file_format])
     end
 
     # Defines what fields are shown in the facets on the search index view
     def facet_fields
-      get_fields(:facet)
+      field_hash([:resource_type, :creator, :keyword, :subject, :language,
+                  :based_near, :publisher, :has_model, :collection, :file_format])
     end
 
     # Defines what fields are available to the user in the universal search
-    def search_fields
-      get_fields(:search)
+    def show_fields
+      field_hash([:resource_type, :creator, :keyword, :subject, :language,
+                       :based_near, :publisher, :date_uploaded, :depositor,
+                       :contributor, :date_modified, :date_created, :rights,
+                       :identifier, :description])
     end
 
     private
 
-      def get_fields(type)
-        fields = {
-            resource_type: FieldConfig.new("Resource Type"),
-            creator: FieldConfig.new(label: "Creator", facet_cleaners: [:titleize]),
-            keyword:  FieldConfig.new(label: "Keyword", facet_cleaners: [:downcase]),
-            subject: FieldConfig.new("Subject"),
-            language: FieldConfig.new("Language"),
-            based_near: FieldConfig.new("Location"),
-            publisher: FieldConfig.new(label: "Publisher", facet_cleaners: [:titleize]),
-        }
-        case type
-        when :index
-          fields.merge(has_model: FieldConfig.new(label: "Object Type",
-                                                              helper_method: :titleize,
-                                                              index_solr_type: :symbol,
-                                                              solr_type: :symbol),
-                       date_uploaded: FieldConfig.new(label: "Date Uploaded",
-                                                      index_solr_type: :stored_sortable,
-                                                      index_type: :date))
-        when :facet
-          fields.merge(has_model: FieldConfig.new(label: "Object Type",
-                                                              helper_method: :titleize,
-                                                              index_solr_type: :symbol,
-                                                              solr_type: :symbol),
-                       collection: FieldConfig.new(label: "Collection", helper_method: :collection_helper_method),
-            file_format: FieldConfig.new("File Format"))
-          when :show
-            fields.merge(date_uploaded: FieldConfig.new(label: "Date Uploaded",
-                                                                  index_solr_type: :stored_sortable,
-                                                                  index_type: :date),
-                         depositor:  FieldConfig.new("Depositor"),
-                         contributor: FieldConfig.new("Contributor"),
-                         date_modified: FieldConfig.new(label: "Date Modified",
-                                                                  index_solr_type: :stored_sortable,
-                                                                  index_type: :date),
-                         date_created: FieldConfig.new("Date Created"),
-                         rights: FieldConfig.new("Rights"),
-                         identifier: FieldConfig.new("Identifier"),
-                         description: FieldConfig.new("Description")
-            )
-        when :search
-          fields.merge(date_uploaded: FieldConfig.new(label: "Date Uploaded",
-                                           index_solr_type: :stored_sortable,
-                                           index_type: :date),
-                depositor:  FieldConfig.new("Depositor"),
-                contributor: FieldConfig.new("Contributor"),
-                date_modified: FieldConfig.new(label: "Date Modified",
-                                               index_solr_type: :stored_sortable,
-                                               index_type: :date),
-                date_created: FieldConfig.new("Date Created"),
-                rights: FieldConfig.new("Rights"),
-                identifier: FieldConfig.new("Identifier"),
-                description: FieldConfig.new("Description"),
-                title: FieldConfig.new("Title"),
-                file_format: FieldConfig.new("File Format")
-          )
+      def field_hash(keys)
+        fields = {}
+        all_fields.each do |field_config|
+          if keys.include?(field_config.key)
+            fields[field_config.key] = field_config
+          end
         end
+        fields
+      end
+
+      def all_fields
+        [ FieldConfig.new(:resource_type),
+          FieldConfig.new(:creator, facet_cleaners: [:titleize]),
+          FieldConfig.new(:keyword, facet_cleaners: [:downcase]),
+          FieldConfig.new(:subject),
+          FieldConfig.new(:language),
+          FieldConfig.new(:based_near),
+          FieldConfig.new(:publisher, facet_cleaners: [:titleize]),
+          FieldConfig.new(:has_model, label: "Object Type",
+                          helper_method: :titleize,
+                          index_solr_type: :symbol, solr_type: :symbol),
+          FieldConfig.new(:date_uploaded, index_solr_type: :stored_sortable,
+                          index_type: :date),
+          FieldConfig.new(:collection, helper_method: :collection_helper_method),
+          FieldConfig.new(:file_format),
+          FieldConfig.new(:date_uploaded,
+                        index_solr_type: :stored_sortable,
+                        index_type: :date),
+          FieldConfig.new(:depositor),
+          FieldConfig.new(:contributor),
+          FieldConfig.new(:date_modified,
+                            index_solr_type: :stored_sortable,
+                            index_type: :date),
+          FieldConfig.new(:date_created),
+          FieldConfig.new(:rights),
+          FieldConfig.new(:identifier),
+          FieldConfig.new(:description),
+          FieldConfig.new(:title),
+          FieldConfig.new(:file_format)
+        ]
       end
   end
 end
