@@ -19,14 +19,14 @@ describe CurationConcerns::Actors::GenericWorkActor do
   context 'with ordered attributes' do
     let(:attributes) do
       {
-        creators: { "0" => { "first_name" => "a",
-                             "last_name"=>"A" },
-                    "1" => { "first_name" => "b",
-                             "last_name"=>"B" },
-                    "2" => { "first_name" => "c",
-                             "last_name"=>"C" },
-                    "3" => { "first_name" => "d",
-                             "last_name"=>"D" } },
+        creators: { '0' => { 'first_name' => 'a',
+                             'last_name' => 'A' },
+                    '1' => { 'first_name' => 'b',
+                             'last_name' => 'B' },
+                    '2' => { 'first_name' => 'c',
+                             'last_name' => 'C' },
+                    '3' => { 'first_name' => 'd',
+                             'last_name' => 'D' } },
         title: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
       }
     end

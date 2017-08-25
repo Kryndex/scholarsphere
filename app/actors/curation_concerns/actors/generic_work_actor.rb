@@ -8,14 +8,8 @@
 module CurationConcerns
   module Actors
     class GenericWorkActor < CurationConcerns::Actors::BaseActor
-
-      # >> p attributes
-      # => {"title"=>["Title"], "contributor"=>[], "description"=>["abs"], "keyword"=>["asdf"], "rights"=>["https://creativecommons.org/licenses/by/4.0/"], "publisher"=>[], "date_created"=>[], "subject"=>[], "language"=>[], "identifier"=>[], "based_near"=>[], "related_url"=>[], "visibility"=>"open", "source"=>[], "resource_type"=>["Article"], "subtitle"=>"", 
-      # "creators"=>{"0"=>{"first_name"=>"first name 000", "last_name"=>"last name 000"}, "1"=>{"first_name"=>"first name 111", "last_name"=>"last name 111"}},
-      # "remote_files"=>[], "uploaded_files"=>["43"]}
-
       def create(attributes)
-        attributes.merge!('creators' => ordered_creators(attributes))
+        attributes['creators'] = ordered_creators(attributes)
         preserve_title_and_creator_order(attributes)
         super
       end
@@ -26,7 +20,7 @@ module CurationConcerns
         # the form, then we'll need to change this code to look
         # up existing Person records by ID.
         def ordered_creators(attributes)
-          ordered_creator_attributes(attributes).inject([]) do |creators, attrs|
+          ordered_creator_attributes(attributes).reduce([]) do |creators, attrs|
             creators << if attrs[:id].blank?
                           Person.create(attrs)
                         else
@@ -41,7 +35,7 @@ module CurationConcerns
         def ordered_creator_attributes(attributes)
           return [] unless attributes[:creators]
           ordered_keys = attributes[:creators].keys.map(&:to_i).sort
-          ordered_keys.map {|k| attributes[:creators][k.to_s] }
+          ordered_keys.map { |k| attributes[:creators][k.to_s] }
         end
 
         # Remove this method once #948 and #949 are resolved.

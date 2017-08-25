@@ -21,7 +21,7 @@ describe GenericWork do
 
       it 'sets the creators' do
         expect { work.save! }
-          .to change { GenericWork.count }.by(1)
+          .to change { described_class.count }.by(1)
           .and change { Person.count }.by(0)
         expect(work.creators).to contain_exactly(frodo, sam)
       end
@@ -33,7 +33,7 @@ describe GenericWork do
       it 'creates a Person record' do
         work.creators.build(first_name: 'Frodo')
         expect { work.save! }
-          .to change { GenericWork.count }.by(1)
+          .to change { described_class.count }.by(1)
           .and change { Person.count }.by(1)
         expect(work.creators.map(&:first_name)).to eq ['Frodo']
         expect(Person.first.first_name).to eq 'Frodo'
