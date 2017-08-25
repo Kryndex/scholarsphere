@@ -4,6 +4,13 @@ Blacklight.onLoad(function() {
     creatorInput.wrap('<div>')
     $(this).prev().append(incrementCreator(creatorInput.parent().html()))
   })
+  $('.base-terms').on('click', '.remove-creator', function() {
+    if ($('.creator_inputs').length > 1) {
+    $(this).parent().remove()
+    } else {
+      $(this).parent().find('.string').each(function() { $(this).val("") })
+    }
+  })
 })
 
 function incrementCreator(creatorInput) {
