@@ -50,9 +50,10 @@ describe CurationConcerns::Actors::GenericWorkActor do
   context 'with an existing Person record' do
     let!(:existing_person) { create(:person) }
     let(:attributes) do
-      { creators: {
-        '0' => { id: existing_person.id, first_name: 'a' }
-      } }
+      {
+        title: ['A title'],
+        creators: { '0' => { id: existing_person.id, first_name: 'a' } }
+      }
     end
 
     it 'sets creator to existing Person record' do
@@ -62,9 +63,10 @@ describe CurationConcerns::Actors::GenericWorkActor do
 
   context 'creator id nil' do
     let(:attributes) do
-      { creators: {
-        '0' => { id: nil, first_name: 'first', last_name: 'last' }
-      } }
+      {
+        title: ['A title'],
+        creators: { '0' => { id: nil, first_name: 'first', last_name: 'last' } }
+      }
     end
 
     it 'does not error' do
