@@ -7,7 +7,6 @@ describe WorkIndexer do
 
   let(:file_set) { build(:file_set) }
   let(:work)     { build(:work, representative: file_set,
-                                creator: ['BIG. Name'],
                                 keyword: ['Bird']) }
   let(:indexer)  { described_class.new(work) }
 
@@ -47,6 +46,8 @@ describe WorkIndexer do
     end
 
     describe 'a groomed document' do
+      before { work.creators.build(first_name: 'BIG.', last_name: 'Name') }
+
       it { is_expected.to include('creator_sim' => ['Big Name']) }
       it { is_expected.to include('creator_tesim' => ['BIG. Name']) }
       it { is_expected.to include('keyword_sim' => ['bird']) }

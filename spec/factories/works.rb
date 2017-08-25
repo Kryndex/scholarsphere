@@ -25,7 +25,7 @@ FactoryGirl.define do
 
       factory :share_file do
         title ['SHARE Document']
-        creator ['Joe Contributor'] # 999
+        creators { [create(:creator, first_name: 'Joe', last_name: 'Contributor')] }
         resource_type ['Dissertation']
       end
 
@@ -141,7 +141,7 @@ FactoryGirl.define do
       keyword       ['tagtag']
       based_near    ['based_nearbased_near']
       language      ['languagelanguage']
-      creator       ['creatorcreator']
+      creators      { [create(:creator, first_name: 'creatorcreator')] }
       contributor   ['contributorcontributor']
       publisher     ['publisherpublisher']
       subject       ['subjectsubject']
@@ -156,7 +156,7 @@ FactoryGirl.define do
       title         ['a required title']
       description   ['a required description']
       keyword       ['required keyword']
-      creator       ['required creator']
+      creators      { [create(:creator, first_name: 'required creator')] }
       rights        ['https://creativecommons.org/licenses/by/4.0/']
       resource_type ['Article']
     end

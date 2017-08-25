@@ -18,7 +18,7 @@ class GenericWork < ActiveFedora::Base
   end
 
   has_and_belongs_to_many :creators, class_name: 'Person', predicate: ::RDF::Vocab::DC11.creator
-  #, inverse_of: :works
+  alias_method :creator, :creators
 
   def self.indexer
     WorkIndexer

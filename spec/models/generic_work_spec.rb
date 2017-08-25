@@ -39,6 +39,17 @@ describe GenericWork do
         expect(Person.first.first_name).to eq 'Frodo'
       end
     end
+
+    # There are many places in both scholarsphere and sufia that use the 'creator' method (instead of 'creators'), so make sure it exists.
+    context 'calling "creator" method' do
+      let(:work) { create(:work, creators: [frodo]) }
+      let!(:frodo) { create(:person, first_name: 'Frodo') }
+
+      it 'returns the creators with no error' do
+        expect(work.creators).to eq [frodo]
+        expect(work.creator).to eq [frodo]
+      end
+    end
   end
 
   describe '#time_uploaded' do
