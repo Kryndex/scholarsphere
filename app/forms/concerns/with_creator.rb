@@ -6,7 +6,6 @@ module WithCreator
   included do
     def creators
       model.creators.build if model.creators.blank?
-      model.creators.build # 999 delete this later
       model.creators.to_a
     end
 

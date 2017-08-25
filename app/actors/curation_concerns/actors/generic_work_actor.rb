@@ -15,19 +15,39 @@ module CurationConcerns
       # "remote_files"=>[], "uploaded_files"=>["43"]}
 
       def create(attributes)
-        # 999 extract the creators and find or create matching Person records
-# byebug
+        attributes.merge!('creators' => ordered_creators(attributes))
         preserve_title_and_creator_order(attributes)
         super
       end
 
       protected
 
+        # TODO: After we get the auto-suggest lookup working in
+        # the form, then we'll need to change this code to look
+        # up existing Person records by ID.
+        def ordered_creators(attributes)
+          ordered_creator_attributes(attributes).inject([]) do |creators, attrs|
+            creators << if attrs[:id].blank?
+                          Person.create(attrs)
+                        else
+                          Person.find(attrs[:id])
+                        end
+          end
+        end
+
+        # Sort the list of creators attributes in order by the
+        # hash key that was passed in by the form.  See the spec
+        # for an example of how the hash is expected to look.
+        def ordered_creator_attributes(attributes)
+          return [] unless attributes[:creators]
+          ordered_keys = attributes[:creators].keys.map(&:to_i).sort
+          ordered_keys.map {|k| attributes[:creators][k.to_s] }
+        end
+
         # Remove this method once #948 and #949 are resolved.
         def preserve_title_and_creator_order(attributes)
-          # 999
-          # curation_concern.creator = attributes[:creator]
-          # curation_concern.save
+          curation_concern.creators = attributes[:creators]
+          curation_concern.save
           curation_concern.title = attributes[:title]
         end
 
