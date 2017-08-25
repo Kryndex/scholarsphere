@@ -17,8 +17,13 @@ class WorkIndexer < Sufia::WorkIndexer
 
     def index_creator(solr_doc)
       creator_names = object.creators.map do |creator|
-        [creator.first_name, creator.last_name].join(' ')
+        first = creator.first_name
+        first = nil if first.blank?
+        last = creator.last_name
+        last = nil if last.blank?
+        [first, last].compact.join(' ')
       end
+
       solr_doc[Solrizer.solr_name('creator', :facetable)] = creator_names
       solr_doc[Solrizer.solr_name('creator', :stored_searchable)] = creator_names
     end

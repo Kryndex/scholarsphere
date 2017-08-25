@@ -53,5 +53,11 @@ describe WorkIndexer do
       it { is_expected.to include('keyword_sim' => ['bird']) }
       it { is_expected.to include('keyword_tesim' => ['Bird']) }
     end
+
+    describe 'creator missing fields' do
+      before { work.creators.build(first_name: 'John', last_name: '') }
+      it { is_expected.to include('creator_sim' => ['John']) }
+      it { is_expected.to include('creator_tesim' => ['John']) }
+    end
   end
 end

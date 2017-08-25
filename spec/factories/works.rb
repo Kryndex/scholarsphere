@@ -141,7 +141,6 @@ FactoryGirl.define do
       keyword       ['tagtag']
       based_near    ['based_nearbased_near']
       language      ['languagelanguage']
-      creators      { [create(:creator, first_name: 'creatorcreator')] }
       contributor   ['contributorcontributor']
       publisher     ['publisherpublisher']
       subject       ['subjectsubject']
@@ -150,6 +149,10 @@ FactoryGirl.define do
       related_url   ['http://example.org/TheRelatedURLLink/']
       rights        ['http://creativecommons.org/licenses/by/3.0/us/']
       date_created  ['two days after the day before yesterday']
+
+      after(:build) do |work, _evaluator|
+        work.creators.build(first_name: 'creatorcreator')
+      end
     end
 
     trait :with_required_metadata do
