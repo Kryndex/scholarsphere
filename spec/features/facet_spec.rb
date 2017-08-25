@@ -3,21 +3,25 @@
 require 'feature_spec_helper'
 
 describe 'Catalog facets' do
+  let(:patricia) { create(:person, first_name: 'Patricia M', last_name: 'Hswe') }
+  let(:patricia_with_dot) { create(:person, first_name: 'Patricia M.', last_name: 'Hswe') }
+  let(:patricia_caps) { create(:person, first_name: 'PATRICIA M.', last_name: 'HSWE') }
+
   let(:work1) { build(:public_work, id: '1',
                                     contributor: ['Contri B. Utor'],
                                     publisher: ['Pu B. Lisher'],
                                     keyword: ['Key. Word.'],
-                                    creator: ['Patricia M. Hswe']) }
+                                    creators: [patricia_with_dot]) }
   let(:work2) { build(:public_work, id: '2',
                                     contributor: ['CONTRI B. UTOR'],
                                     publisher: ['PU B. LISHER'],
                                     keyword: ['KEY. WORD.'],
-                                    creator: ['PATRICIA M. HSWE']) }
+                                    creators: [patricia_caps]) }
   let(:work3) { build(:public_work, id: '3',
                                     contributor: ['Contri B Utor'],
                                     publisher: ['Pu B Lisher'],
                                     keyword: ['Key Word'],
-                                    creator: ['Patricia M Hswe']) }
+                                    creators: [patricia]) }
 
   before do
     index_works_and_collections(work1, work2, work3)

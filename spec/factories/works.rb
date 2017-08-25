@@ -25,8 +25,11 @@ FactoryGirl.define do
 
       factory :share_file do
         title ['SHARE Document']
-        creators { [create(:creator, first_name: 'Joe', last_name: 'Contributor')] }
         resource_type ['Dissertation']
+
+        after(:build) do |work, _evaluator|
+          work.creators.build(first_name: 'Joe', last_name: 'Contributor')
+        end
       end
 
       factory :featured_file do
@@ -159,9 +162,12 @@ FactoryGirl.define do
       title         ['a required title']
       description   ['a required description']
       keyword       ['required keyword']
-      creators      { [create(:creator, first_name: 'required creator')] }
       rights        ['https://creativecommons.org/licenses/by/4.0/']
       resource_type ['Article']
+
+      after(:build) do |work, _evaluator|
+        work.creators.build(first_name: 'required creator')
+      end
     end
   end
 end
