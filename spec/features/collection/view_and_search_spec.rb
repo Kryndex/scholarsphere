@@ -6,8 +6,9 @@ require 'feature_spec_helper'
 include Selectors::Dashboard
 
 describe Collection, type: :feature do
+  let(:creator) { FactoryGirl.create(:person) }
   let!(:collection)  { create(:public_collection, :with_complete_metadata,
-                              creator: ['somebody'],
+                              creators: creator,
                               depositor: current_user.login,
                               members: [file1, file2]) }
 

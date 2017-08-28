@@ -4,11 +4,12 @@ FactoryGirl.define do
   factory :collection, aliases: [:public_collection] do
     transient do
       user { FactoryGirl.create(:user) }
+      creator { person.build(first_name: 'creatorcreator') }
     end
 
     sequence(:title)       { |n| ["Title #{n}"] }
     sequence(:description) { |n| ["Description #{n}"] }
-    sequence(:creator)     { |n| ["Creator #{n}"] }
+  
     visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
 
     after(:build) do |collection, attrs|
@@ -18,11 +19,11 @@ FactoryGirl.define do
     factory :my_collection do
       title ['My collection']
       description 'My incredibly detailed description of the collection'
-      creator ['The Collector']
+      creators [creator]
     end
 
     trait :with_complete_metadata do
-      creator ['Joe Contributor']
+      creators [creator]
       resource_type ['Dissertation aaa']
       publisher ['publisher bbb']
       contributor ['contrib ccc']
