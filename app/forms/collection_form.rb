@@ -5,6 +5,8 @@ class CollectionForm < Sufia::Forms::CollectionForm
 
   self.required_fields = [:title, :description, :keyword]
 
+  include WithCreator
+
   # @param [Collection] model
   # @param [Ability] current_ability
   # @param [ActionDispatch::Request] request
