@@ -9,7 +9,7 @@ module CurationConcerns
   module Actors
     class GenericWorkActor < CurationConcerns::Actors::BaseActor
       def create(attributes)
-        attributes['creators'] = ordered_creators(attributes)
+# 999        attributes['creators'] = ordered_creators(attributes)
         preserve_title_and_creator_order(attributes)
         super
       end

@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe GenericWorkToShareJSONService do
   let(:name_service) { double }
-  let(:creator) { FactoryGirl.create(:person) } 
+  let(:creator) { FactoryGirl.create(:person) }
   before do
     allow_any_instance_of(GenericWork).to receive(:current_host).and_return('https://scholarsphere.psu.edu')
     allow(NameDisambiguationService).to receive(:new).with(creator).and_return(name_service)

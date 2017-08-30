@@ -3,12 +3,8 @@
 class Collection < ActiveFedora::Base
   include ::CurationConcerns::CollectionBehavior
   include CurationConcerns::BasicMetadata
+  include HasCreators
   self.indexer = CollectionIndexer
-
-  has_and_belongs_to_many :creators, class_name: 'Person', predicate: ::RDF::Vocab::DC11.creator
-  alias_method :creator, :creators
-
-  
 
   def private_access?
     super unless new_record?

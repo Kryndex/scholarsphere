@@ -5,6 +5,31 @@ require 'rails_helper'
 describe Collection do
   subject { collection }
 
+  describe '#creators=' do
+    let(:collection) do
+      Collection.new(title: ['A Collection']) do |coll|
+        coll.apply_depositor_metadata('hello@example.com')
+      end
+    end
+
+    context 'with attributes' do
+      let(:attrs) do
+        {
+          "0" => { "first_name"=>"Joe", "last_name"=>"Smith" },
+          "1" => { "first_name"=>"Yuki", "last_name"=>"Maeda" }
+        }
+      end
+
+  # 999 START HERE ??
+      it 'creates the Person records' do
+        expect{ collection.creators=(attrs) }.to change { Person.count }.by(2)
+        collection.save!
+        expect(collection.creators.map(&:first_name)).to contain_exactly('Joe', 'Yuki')
+        expect(collection.creators.map(&:last_name)).to contain_exactly('Smith', 'Maeda')
+      end
+    end
+  end
+
   context 'with no attached files' do
     let(:collection) { build(:collection) }
 

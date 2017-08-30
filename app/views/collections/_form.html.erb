@@ -3,9 +3,7 @@
     <h2 class="non lower"><%= t('sufia.collection.edit.description') %></h2>
     <div id="base-terms">
       <% f.object.primary_terms.each do |term| %>
-      <% unless term.to_s == 'creator' %>
         <%= render_edit_field_partial(term, f: f) %>
-      <% end %>
       <% end %>
     </div>
     <%= link_to t('sufia.collection.edit.additional_fields'),

@@ -63,7 +63,8 @@ describe WorkShowPresenter do
   describe '#facet_mapping' do
     subject { presenter.facet_mapping(:creator) }
 
-    let(:work) { build(:work, creator: ['JOE SMITH']) }
+    let(:work) { build :work }
+    let!(:joe) { work.creators.build(first_name: 'JOE', last_name: 'SMITH') }
 
     it { is_expected.to eq('JOE SMITH' => 'Joe Smith') }
   end

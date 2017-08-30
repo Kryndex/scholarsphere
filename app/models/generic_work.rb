@@ -6,6 +6,7 @@ class GenericWork < ActiveFedora::Base
   include Sufia::WorkBehavior
   include ShareNotify::Metadata
   include AdditionalMetadata
+  include HasCreators
 
   self.human_readable_type = 'Work'
 
@@ -16,9 +17,6 @@ class GenericWork < ActiveFedora::Base
   property :subtitle, predicate: ::RDF::Vocab::EBUCore.subtitle, multiple: false do |index|
     index.as :stored_searchable
   end
-
-  has_and_belongs_to_many :creators, class_name: 'Person', predicate: ::RDF::Vocab::DC11.creator
-  alias_method :creator, :creators
 
   def self.indexer
     WorkIndexer

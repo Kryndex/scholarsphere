@@ -1,7 +1,7 @@
 <h3>Creators</h3>
 <div class="creator_container">
 <% @form.creators.each_with_index do |creator, index| %>
-  <% id_base = "generic_work[creators][#{index}]"%>
+  <% id_base = "#{@form.class_name}[creators][#{index}]"%>
 
   <% unless creator.id.blank? %>
     <%= hidden_field_tag "#{id_base}[id]", creator.id %>

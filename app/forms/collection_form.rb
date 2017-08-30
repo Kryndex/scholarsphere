@@ -17,6 +17,10 @@ class CollectionForm < Sufia::Forms::CollectionForm
     super(model)
   end
 
+  def class_name
+    'collection'
+  end
+
   # @return [Array<WorkShowPresenter>]
   # This is so we can display the title and other pertinent information about the works
   # that will be added to a collection.
