@@ -10,6 +10,7 @@ class Person < ActiveFedora::Base
   end
 
   def self.find_or_create(attributes)
+    attributes = attributes.with_indifferent_access
     query_attrs = if attributes[:id].blank?
                     {
                       first_name_tesim: attributes[:first_name],

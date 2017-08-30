@@ -7,11 +7,15 @@ module HasCreators
     has_and_belongs_to_many :creators, class_name: 'Person', predicate: ::RDF::Vocab::DC11.creator
     alias_method :creator, :creators
 
-    # TODO: Will this only be used by passing in a hashes of attributes, or is there a case where we want to be able to pass in Person records?
-    #
-    # {"0"=>{"first_name"=>"Frodo", "last_name"=>"Baggins"}}
     def creators=(values)
-      person_records = values.map { |key, attrs| Person.find_or_create(attrs) }
+      values = values.values if values.is_a? Hash
+      person_records = values.map do |v|
+        if v.is_a? Person
+          v
+        else
+          Person.find_or_create(v)
+        end
+      end
       super(person_records)
     end
   end

@@ -18,32 +18,11 @@ describe CurationConcerns::Actors::GenericWorkActor do
 
   context 'with ordered attributes' do
     let(:attributes) do
-      {
-        creators: { '0' => { 'first_name' => 'a',
-                             'last_name' => 'A' },
-                    '1' => { 'first_name' => 'b',
-                             'last_name' => 'B' },
-                    '2' => { 'first_name' => 'c',
-                             'last_name' => 'C' },
-                    '3' => { 'first_name' => 'd',
-                             'last_name' => 'D' } },
-        title: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j']
-      }
+      { title: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'] }
     end
 
-    # TODO: The magic that made the ordering work for Strings doesn't seem to work for URIs.
     it 'keeps the correct order' do
-      expect(work.creators.map(&:first_name)).to eq(['a', 'b', 'c', 'd'])
-      expect(work.creators.map(&:last_name)).to eq(['A', 'B', 'C', 'D'])
       expect(work.title).to eq(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j'])
-    end
-  end
-
-  context 'creator nil' do
-    let(:attributes) { { creators: nil } }
-
-    it 'does not error' do
-      expect(work.creators).to eq([])
     end
   end
 
@@ -52,6 +31,7 @@ describe CurationConcerns::Actors::GenericWorkActor do
     let(:attributes) do
       {
         title: ['A title'],
+        # 999
         creators: { '0' => { id: existing_person.id, first_name: 'a' } }
       }
     end
@@ -69,7 +49,7 @@ describe CurationConcerns::Actors::GenericWorkActor do
       }
     end
 
-    it 'does not error' do
+    it 'sets the creators' do
       expect(work.creators.map(&:first_name)).to eq ['first']
       expect(work.creators.map(&:last_name)).to eq ['last']
     end

@@ -40,6 +40,43 @@ describe GenericWork do
       end
     end
 
+    context 'with hash inputs' do
+      let(:work) { create(:work, creators: attributes) }
+      let(:attributes) do
+        [{ "first_name"=>"Fred", "last_name"=>"Jones" },
+         { "first_name"=>"Lucy", "last_name"=>"Lee" }]
+      end
+      let!(:lucy) { create(:person, first_name: 'Lucy', last_name: 'Lee') } # Record for Lucy already exists
+
+      it 'finds or creates the Person record' do
+        expect { work.save! }
+          .to change { described_class.count }.by(1)
+          .and change { Person.count }.by(1)
+        expect(work.creators).to include lucy
+        expect(work.creators.map(&:first_name)).to contain_exactly('Fred', 'Lucy')
+      end
+    end
+
+    # This style of inputs comes from the form
+    context 'with nested hash inputs' do
+      let(:work) { create(:work, creators: attributes) }
+      let(:attributes) do
+        {
+          '0' => { "first_name"=>"Fred", "last_name"=>"Jones" },
+          '1' => { "first_name"=>"Lucy", "last_name"=>"Lee" }
+        }
+      end
+      let!(:lucy) { create(:person, first_name: 'Lucy', last_name: 'Lee') } # Record for Lucy already exists
+
+      it 'finds or creates the Person record' do
+        expect { work.save! }
+          .to change { described_class.count }.by(1)
+          .and change { Person.count }.by(1)
+        expect(work.creators).to include lucy
+        expect(work.creators.map(&:first_name)).to contain_exactly('Fred', 'Lucy')
+      end
+    end
+
     # There are many places in both scholarsphere and sufia that use the 'creator' method (instead of 'creators'), so make sure it exists.
     context 'calling "creator" method' do
       let(:work) { create(:work, creators: [frodo]) }
