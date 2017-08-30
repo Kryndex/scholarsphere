@@ -5,10 +5,12 @@ require 'rails_helper'
 describe GenericWorkToShareJSONService do
   let(:name_service) { double }
   let(:creator) { FactoryGirl.create(:person) }
+
   before do
     allow_any_instance_of(GenericWork).to receive(:current_host).and_return('https://scholarsphere.psu.edu')
     allow(NameDisambiguationService).to receive(:new).with(creator).and_return(name_service)
   end
+
   context 'when checking the fixture file' do
     let(:file) { build(:file, id: 'x346f017s', title: ['Set9 ShamR 1.tif'], creator: ['Santy, Lorraine C'], date_modified: DateTime.parse('2015-07-30T20:15:08.528+00:00')) }
     let(:json) { JSON.parse(File.open(fixture_path + '/ss-share.json', 'rb').read) }

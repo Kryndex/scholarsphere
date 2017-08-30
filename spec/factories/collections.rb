@@ -9,7 +9,7 @@ FactoryGirl.define do
 
     sequence(:title)       { |n| ["Title #{n}"] }
     sequence(:description) { |n| ["Description #{n}"] }
-  
+
     visibility Hydra::AccessControls::AccessRight::VISIBILITY_TEXT_VALUE_PUBLIC
 
     after(:build) do |collection, attrs|
