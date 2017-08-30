@@ -11,10 +11,11 @@ class Person < ActiveFedora::Base
 
   def self.find_or_create(attributes)
     attributes = attributes.with_indifferent_access
+    attributes.delete(:id) if attributes[:id].blank?
     query_attrs = if attributes[:id].blank?
                     {
-                      first_name_tesim: attributes[:first_name],
-                      last_name_tesim: attributes[:last_name]
+                      first_name_sim: attributes[:first_name],
+                      last_name_sim: attributes[:last_name]
                       # TODO: Match middle initial too?
                     }
                   else

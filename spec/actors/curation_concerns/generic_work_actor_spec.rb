@@ -31,7 +31,6 @@ describe CurationConcerns::Actors::GenericWorkActor do
     let(:attributes) do
       {
         title: ['A title'],
-        # 999
         creators: { '0' => { id: existing_person.id, first_name: 'a' } }
       }
     end
