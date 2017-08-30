@@ -13,7 +13,7 @@ describe SolrDocumentGroomer do
     before { described_class.call(document) }
 
     context 'with normalized fields' do
-      subject { document.fetch('creator_sim') }
+      subject { document.fetch('creator_name_sim') }
 
       it { is_expected.to contain_exactly('I Am Legend', 'Will I Am') }
     end

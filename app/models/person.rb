@@ -2,11 +2,11 @@
 
 class Person < ActiveFedora::Base
   property :first_name, predicate: ::RDF::Vocab::FOAF.firstName, multiple: false do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :symbol
   end
 
   property :last_name, predicate: ::RDF::Vocab::FOAF.lastName, multiple: false do |index|
-    index.as :stored_searchable
+    index.as :stored_searchable, :symbol
   end
 
   def self.find_or_create(attributes)
@@ -14,8 +14,8 @@ class Person < ActiveFedora::Base
     attributes.delete(:id) if attributes[:id].blank?
     query_attrs = if attributes[:id].blank?
                     {
-                      first_name_sim: attributes[:first_name],
-                      last_name_sim: attributes[:last_name]
+                      first_name_ssim: attributes[:first_name],
+                      last_name_ssim: attributes[:last_name]
                       # TODO: Match middle initial too?
                     }
                   else

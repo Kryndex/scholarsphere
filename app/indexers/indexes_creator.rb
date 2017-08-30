@@ -20,7 +20,7 @@ module IndexesCreator
         [first, last].compact.join(' ')
       end
 
-      solr_doc[Solrizer.solr_name('creator', :facetable)] = creator_names
-      solr_doc[Solrizer.solr_name('creator', :stored_searchable)] = creator_names
+      solr_doc[Solrizer.solr_name('creator_name', :facetable)] = creator_names
+      solr_doc[Solrizer.solr_name('creator_name', :stored_searchable)] = creator_names
     end
 end
