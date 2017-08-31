@@ -27,8 +27,10 @@ FactoryGirl.define do
         title ['SHARE Document']
         resource_type ['Dissertation']
 
-        after(:build) do |work, _evaluator|
-          work.creators.build(first_name: 'Joe', last_name: 'Contributor')
+        after(:build) do |work, evaluator|
+          if evaluator.creators.blank?
+            work.creators.build(first_name: 'Joe', last_name: 'Contributor')
+          end
         end
       end
 
@@ -153,8 +155,10 @@ FactoryGirl.define do
       rights        ['http://creativecommons.org/licenses/by/3.0/us/']
       date_created  ['two days after the day before yesterday']
 
-      after(:build) do |work, _evaluator|
-        work.creators.build(first_name: 'creatorcreator')
+      after(:build) do |work, evaluator|
+        if evaluator.creators.blank?
+          work.creators.build(first_name: 'creatorcreator')
+        end
       end
     end
 
@@ -165,8 +169,10 @@ FactoryGirl.define do
       rights        ['https://creativecommons.org/licenses/by/4.0/']
       resource_type ['Article']
 
-      after(:build) do |work, _evaluator|
-        work.creators.build(first_name: 'required creator')
+      after(:build) do |work, evaluator|
+        if evaluator.creators.blank?
+          work.creators.build(first_name: 'required creator')
+        end
       end
     end
   end
