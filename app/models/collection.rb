@@ -2,7 +2,7 @@
 
 class Collection < ActiveFedora::Base
   include ::CurationConcerns::CollectionBehavior
-  include CurationConcerns::BasicMetadata
+  include ::BasicMetadata
   include HasCreators
   self.indexer = CollectionIndexer
 
