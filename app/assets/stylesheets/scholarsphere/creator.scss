@@ -1,12 +1,16 @@
-.add-creator {
-  padding-left: 0;
-  margin-bottom: 1em;
+.btn-link.add-creator {
+  padding:0;
+  margin-bottom: 2.5em;
   text-decoration: underline;
 }
 
-.remove-creator {
+.btn-link.remove-creator {
   float:right;
   text-decoration: underline;
   color: #d9534f;
+  padding:0;
 }
   
+.twitter-typeahead {
+  float:none;
+}
