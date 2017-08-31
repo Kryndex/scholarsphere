@@ -12,8 +12,10 @@
 //= require batch_edit
 //= require blacklight_gallery
 //= require openseadragon
+//= require typeahead
 //= require scholarsphere/fileupload
 //= require scholarsphere/layout
 //= require scholarsphere/thumbnails
 //= require scholarsphere/creator
+//= require scholarsphere/creator_autocomplete
 //= require sufia

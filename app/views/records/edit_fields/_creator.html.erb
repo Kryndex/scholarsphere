@@ -14,7 +14,7 @@
     creator.first_name,
     required: false,
     id: first_name_id,
-    class: 'form-control string required' %>
+    class: 'form-control string required creator-first-name creator' %>
 
   <% last_name_id = "#{id_base}[last_name]" %>
   <%= label_tag last_name_id, 'Last Name' %>
@@ -22,7 +22,7 @@
     creator.last_name,
     required: false,
     id: last_name_id,
-      class: 'form-control string required' %>
+      class: 'form-control string required creator-last-name creator' %>
   </div>
 <% end %>
 </div>
