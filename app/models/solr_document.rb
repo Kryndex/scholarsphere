@@ -16,7 +16,7 @@ class SolrDocument
   alias to_hash to_h
 
   def creator
-    fetch(Solrizer.solr_name('creator', :stored_searchable), [])
+    fetch(Solrizer.solr_name('creator_name', :stored_searchable), [])
   end
 
   def collections
