@@ -78,11 +78,10 @@ ScholarSphere::Application.routes.draw do
 
   get 'about' => 'static#about', id: 'about_page'
 
-
   # Routes for looking a Person
   get '/person/first_name/:q', to: 'person#first_name_query'
   get '/creators/all', to: 'person#all'
-  
+
   # This must be the very last route in the file because it has a catch-all route for 404 errors.
   # This behavior seems to show up only in production mode.
   mount Sufia::Engine => '/'
