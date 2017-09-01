@@ -40,6 +40,7 @@ var creatorAutocomplete = {
       creator.firstName = suggestion.first_name
       creator.lastName = suggestion.last_name
       creator.index = $('.creator_inputs').length
+      creator.id = suggestion.id
       creator.readonly = 'readonly'
       $('.creator_container').append(creator.render())
     })

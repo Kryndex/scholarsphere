@@ -10,7 +10,8 @@ var Creator = {
   render: function () {
     var markup =
       `<div class="well creator_inputs">
-    <button type="button" class="btn btn-link remove remove-creator">
+      <input type="hidden" name="generic_work[creators][${this.index}][id]" id="generic_work_creators_${this.index}_id" value="${this.id}">
+      <button type="button" class="btn btn-link remove remove-creator">
       <span class="glyphicon glyphicon-remove"></span><span class="controls-remove-text">Remove</span>
     </button>
     <label for="generic_work_creators_${this.index}_first_name">First Name</label>
