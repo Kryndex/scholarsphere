@@ -5,27 +5,26 @@ var creatorAutocomplete = {
   all: {},
   initBloodhound: function () {
     this.all = new Bloodhound({
-      datumTokenizer: Bloodhound.tokenizers.obj.whitespace,
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('first_name','last_name'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
+      sufficient: 0,  
+      limit:10,      
       prefetch: {
         url: '../../creators/all/'
-      },
-      remote: {
-        url: '../../creators/all'
       }
     })
     this.all.initialize()
   },
   activateTypeahead: function (index) {
     $('#find_creator').typeahead({
-      minLength: 3,
       highlight: true
     },
       {
-        name: 'my-dataset',
+        name: 'creators',
+        display: 'first_name',
         source: this.all,
         templates: {
-          empty: '<p>Unable to find any results</p>',
+          empty: '<p>  Unable to find any results  </p>',
           suggestion: function (data) {
             return '<p>' + data.first_name + ' ' + data.last_name + '</p>'
           }

@@ -46,6 +46,7 @@ gem 'yaml_db'
 
 group :development, :test do
   gem 'fcrepo_wrapper'
+  gem 'faker'
   gem 'rspec'
   gem 'rspec-its'
   gem 'rspec-rails'
