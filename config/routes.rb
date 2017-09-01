@@ -16,7 +16,9 @@ ScholarSphere::Application.routes.draw do
   mount Qa::Engine => '/authorities'
 
   curation_concerns_collections
-  curation_concerns_basic_routes
+  curation_concerns_basic_routes do 
+  
+  end
   curation_concerns_embargo_management
   concern :exportable, Blacklight::Routes::Exportable.new
   concern :searchable, Blacklight::Routes::Searchable.new
@@ -79,8 +81,7 @@ ScholarSphere::Application.routes.draw do
   get 'about' => 'static#about', id: 'about_page'
 
   # Routes for looking a Person
-  get '/person/first_name/:q', to: 'person#first_name_query'
-  get '/creators/all', to: 'person#all'
+  get '/creators/all', to: 'persons#all'
 
   # This must be the very last route in the file because it has a catch-all route for 404 errors.
   # This behavior seems to show up only in production mode.
