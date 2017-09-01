@@ -61,7 +61,7 @@ describe WorkShowPresenter do
   end
 
   describe '#facet_mapping' do
-    subject { presenter.facet_mapping(:creator) }
+    subject { presenter.facet_mapping(:creator_name) }
 
     let(:work) { build :work }
     let!(:joe) { work.creators.build(first_name: 'JOE', last_name: 'SMITH') }
