@@ -70,7 +70,7 @@ describe Collection, type: :feature do
 
     before { sign_in(current_user) }
 
-    specify js: true do
+    specify do
       visit '/dashboard/collections'
       db_item_actions_toggle(collection).click
       click_link 'Edit Collection'

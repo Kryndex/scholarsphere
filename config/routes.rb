@@ -16,8 +16,7 @@ ScholarSphere::Application.routes.draw do
   mount Qa::Engine => '/authorities'
 
   curation_concerns_collections
-  curation_concerns_basic_routes do 
-  
+  curation_concerns_basic_routes do
   end
   curation_concerns_embargo_management
   concern :exportable, Blacklight::Routes::Exportable.new

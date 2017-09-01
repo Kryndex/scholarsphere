@@ -16,10 +16,6 @@ module BasicMetadata
     property :resource_type, predicate: ::RDF::Vocab::DC.type do |index|
       index.as :stored_searchable, :facetable
     end
-    # 99999999999
-    # property :creator, predicate: ::RDF::Vocab::DC11.creator do |index|
-    #   index.as :stored_searchable, :facetable
-    # end
     property :contributor, predicate: ::RDF::Vocab::DC11.contributor do |index|
       index.as :stored_searchable, :facetable
     end
