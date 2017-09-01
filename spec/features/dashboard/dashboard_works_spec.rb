@@ -15,6 +15,7 @@ describe 'Dashboard Works', type: :feature do
            creators: [create(:creator)],
            date_uploaded: DateTime.now + 1.hour)
   end
+  let(:work1_creator_name) { [work1.creator.first.first_name, work1.creator.first.last_name].join(' ') }
 
   let!(:work2) do
     create(:registered_work, depositor: current_user.login, title: ['Registered work'])
@@ -42,7 +43,7 @@ describe 'Dashboard Works', type: :feature do
 
       # Additional metadata about the work1 is hidden
       expect(page).not_to have_content 'Edit Access'
-      expect(page).not_to have_content work1.creator.first
+      expect(page).not_to have_content work1_creator_name
 
       # A return controller is specified
       expect(page).to have_css('input#return_controller', visible: false)
@@ -57,7 +58,7 @@ describe 'Dashboard Works', type: :feature do
 
       # Displays additional metadata about that work1
       first('span.glyphicon-chevron-right').click
-      expect(page).to have_content work1.creator.first
+      expect(page).to have_content work1_creator_name
       expect(page).to have_content work1.depositor
       expect(page).to have_content 'Edit Access'
 
@@ -167,8 +168,8 @@ describe 'Dashboard Works', type: :feature do
         expect(page).not_to have_content 'You searched for:'
 
         # When I search by Creator it displays the correct results
-        search_my_files_by_term(work1.creator.first.to_s)
-        expect(page).to have_content "You searched for: #{work1.creator.first}"
+        search_my_files_by_term(work1_creator_name)
+        expect(page).to have_content "You searched for: #{work1_creator_name}"
         page_should_only_list work1
       end
     end
