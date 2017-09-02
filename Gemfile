@@ -74,11 +74,13 @@ end
 
 group :test do
   gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'equivalent-xml'
   gem 'factory_girl_rails', '~> 4.1'
   gem 'poltergeist', '~> 1.9'
   gem 'rspec-activemodel-mocks'
+  gem 'selenium-webdriver'
   gem 'vcr'
   gem 'webmock'
 end

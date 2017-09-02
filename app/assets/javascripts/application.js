@@ -7,7 +7,6 @@
 //= require turbolinks
 // Required by Blacklight
 //= require blacklight/blacklight
-
 // Requiring each file individually so we can load Sufia's JS, with our overrides, at the end.
 //= require batch_edit
 //= require blacklight_gallery
@@ -19,4 +18,5 @@
 //= require scholarsphere/creator/creator
 //= require scholarsphere/creator/creator_autocomplete
 //= require scholarsphere/creator/creator_behavior
+//= require mustache
 //= require sufia

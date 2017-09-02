@@ -1,0 +1,12 @@
+<script type="text/template" id="creator_template">
+ <div class="well creator_inputs">
+    <input type="hidden" name="generic_work[creators][{{index}}][id]" id="generic_work_creators_{{index}}_id" value="{{id}}">
+    <button type="button" class="btn btn-link remove remove-creator">
+      <span class="glyphicon glyphicon-remove"></span><span class="controls-remove-text">Remove</span>
+    </button>
+    <label for="generic_work_creators_{{index}}_first_name">First Name</label>
+    <input type="text" {{readonly}} name="generic_work[creators][{{index}}][first_name]" id="generic_work[creators][{{index}}][first_name]" class="form-control string required creator-first-name creator" value="{{firstName}}">
+    <label for="generic_work_creators_{{index}}_last_name">Last Name</label>
+    <input type="text" {{readonly}} name="generic_work[creators][{{index}}][last_name]" id="generic_work[creators][{{index}}][last_name]" class="form-control string required creator-last-name creator" value="{{lastName}}">
+  </div>
+</script>

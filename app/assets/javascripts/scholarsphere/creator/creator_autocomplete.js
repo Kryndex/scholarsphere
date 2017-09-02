@@ -42,7 +42,9 @@ var creatorAutocomplete = {
       creator.index = $('.creator_inputs').length
       creator.id = suggestion.id
       creator.readonly = 'readonly'
-      $('.creator_container').append(creator.render())
+      var template = $('#creator_template').html()
+      var render = Mustache.render(template, creator)
+      $('.creator_container').append(render)
     })
   },
   typeaheadClose: function () {

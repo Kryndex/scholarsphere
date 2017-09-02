@@ -6,7 +6,9 @@ var CreatorBehavior = {
     $('.add-creator').on('click', function () {
       var creator = Object.create(Creator)
       creator.index = $('.creator_inputs').length
-      $('.creator_container').append(creator.render())
+      var template = $('#creator_template').html()
+      var render = Mustache.render(template, creator)
+      $('.creator_container').append(render)
     })
   },
   activateRemoveButton: function () {
