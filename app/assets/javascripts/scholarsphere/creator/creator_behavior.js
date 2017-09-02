@@ -13,11 +13,7 @@ var CreatorBehavior = {
   },
   activateRemoveButton: function () {
     $('.base-terms').on('click', '.remove-creator', function () {
-      if ($('.creator_inputs').length > 1) {
         $(this).parent().remove()
-      } else {
-        $(this).parent().find('.string').each(function () { $(this).val('') })
-      }
     })
   }
 }
