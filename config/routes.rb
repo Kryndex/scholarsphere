@@ -80,7 +80,7 @@ ScholarSphere::Application.routes.draw do
   get 'about' => 'static#about', id: 'about_page'
 
   # Routes for looking a Person
-  get '/creators/all', to: 'persons#all'
+  get '/creators/name_query', to: 'persons#name_query'
 
   # This must be the very last route in the file because it has a catch-all route for 404 errors.
   # This behavior seems to show up only in production mode.

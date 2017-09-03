@@ -2,18 +2,18 @@ var creatorAutocomplete = {
   /**
    * Object for setting up Typeahead and Bloodhound
    */
-  all: {},
+  nameQuery: {},
   initBloodhound: function () {
-    this.all = new Bloodhound({
-      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('first_name','last_name'),
+    this.nameQuery = new Bloodhound({
+      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('first_name_tesim','last_name_tesim'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      sufficient: 0,  
       limit:10,      
-      prefetch: {
-        url: '../../creators/all/'
+      remote: {
+        url: '../../creators/name_query?q=%QUERY',
+        wildcard: '%QUERY'
       }
     })
-    this.all.initialize()
+    this.nameQuery.initialize()
   },
   activateTypeahead: function (index) {
     $('#find_creator').typeahead({
@@ -21,24 +21,24 @@ var creatorAutocomplete = {
     },
       {
         name: 'creators',
-        display: 'first_name',
-        source: this.all,
+        display: 'first_name_tesim',
+        source: this.nameQuery,
         templates: {
           empty: '<p>  Unable to find any results  </p>',
           suggestion: function (data) {
-            return '<p>' + data.first_name + ' ' + data.last_name + '</p>'
+            return '<p>' + data.first_name_tesim + ' ' + data.last_name_tesim + '</p>'
           }
         },
         display: function (data) {
-          return data.first_name + ' ' + data.last_name
+          return data.first_name_tesim + ' ' + data.last_name_tesim
         }
       })
   },
   typeaheadSelect: function (index) {
     $('#find_creator').bind('typeahead:select', function (ev, suggestion) {
       var creator = Object.create(Creator)
-      creator.firstName = suggestion.first_name
-      creator.lastName = suggestion.last_name
+      creator.firstName = suggestion.first_name_tesim
+      creator.lastName = suggestion.last_name_tesim
       creator.index = $('.creator_inputs').length
       creator.id = suggestion.id
       creator.readonly = 'readonly'
