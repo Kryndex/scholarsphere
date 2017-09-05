@@ -19,7 +19,7 @@ class BatchEditForm < Sufia::Forms::BatchEditForm
     # The model.creators association doesn't seem to work
     # properly with an unpersisted record, so we manually load
     # the creator records here.
-    if model.new_record? && !model.creator_ids.blank?
+    if model.new_record? && model.creator_ids.present?
       person_records = Person.find model.creator_ids
       model.creators = person_records
     end

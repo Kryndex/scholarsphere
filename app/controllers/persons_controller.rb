@@ -2,7 +2,7 @@
 
 class PersonsController < ApplicationController
   protect_from_forgery with: :null_session
- 
+
   def name_query
     authorize! :name_query, Person
 

@@ -6,7 +6,7 @@ class Ability
   include Sufia::Ability
 
   self.ability_logic += [:everyone_can_create_curation_concerns, :admins_can_read_solr_documents, :registered_users_can_search_persons]
-  
+ 
   def editor_abilities
     super
     if admin?
