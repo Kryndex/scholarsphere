@@ -17,7 +17,7 @@ class CollectionForm < Sufia::Forms::CollectionForm
     super(model)
   end
 
-  def class_name
+  def model_class_name
     'collection'
   end
 

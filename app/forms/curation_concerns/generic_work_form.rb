@@ -28,7 +28,7 @@ module CurationConcerns
       attrs
     end
 
-    def class_name
+    def model_class_name
       'generic_work'
     end
 
