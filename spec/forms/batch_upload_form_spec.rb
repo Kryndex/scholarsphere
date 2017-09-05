@@ -18,9 +18,12 @@ describe BatchUploadForm do
   end
 
   describe '#initialize_field' do
-    subject { form[:creator] }
-
-    it { is_expected.to eq(['User, Test A']) }
+    it 'inits to the name of the current user' do
+      expect(form.creators.count).to eq 1
+      current_creator = form.creators.first
+      expect(current_creator.first_name).to eq 'Test A'
+      expect(current_creator.last_name).to eq 'User'
+    end
   end
 
   describe '#model_attributes' do
