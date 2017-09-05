@@ -1,8 +1,21 @@
 # frozen_string_literal: true
 
-require Sufia::Engine.root.to_s + '/app/models/batch_upload_item.rb'
-
+# This stands in for an object to be created from the BatchUploadForm.
+# It should never actually be persisted in the repository.
+# The properties on this form should be copied to a real work type.
 class BatchUploadItem < ActiveFedora::Base
-  # Re-open this class from Sufia so that we can add the 'creators=' method
+  include ::CurationConcerns::WorkBehavior
+  include ::BasicMetadata
+  include Sufia::WorkBehavior
   include HasCreators
+
+  # This mocks out the behavior of Hydra::PCDM::PcdmBehavior
+  def in_collection_ids
+    []
+  end
+
+  def create_or_update
+    raise "This is a read only record"
+  end
 end
+
