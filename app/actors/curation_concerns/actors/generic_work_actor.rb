@@ -3,7 +3,7 @@
 # Changes the behavior of BaseActor#apply_save_data_to_curation_concern to re-assign the depositor
 # based if the user is depositing on behalf of someone else.
 #
-# Additionally, this actor sets the title and creator (again) because this preserves the order. It is
+# Additionally, this actor sets the title (again) because this preserves the order. It is
 # not exactly clear why this happens, but it is a temporary solution until #948 and #949 are addressed.
 module CurationConcerns
   module Actors
