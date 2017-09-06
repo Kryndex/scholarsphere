@@ -26,7 +26,7 @@ class Ability
   end
 
   def registered?
-    current_user.groups.include? 'registered'
+    current_user.group_list.include? 'registered' or 'umg/up.dlt.scholarsphere-users'
   end
 
   # Remove if/when projecthydra/curation_concerns#1118 is resolved
