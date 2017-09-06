@@ -6,9 +6,10 @@
 </div>
 <% @form.creators.each_with_index do |creator, index| %>
   <% id_base = "#{@form.model_class_name}[creators][#{index}]"%>
-
+  
   <% unless creator.id.blank? %>
-    <%= hidden_field_tag "#{id_base}[id]", creator.id %>
+     <%= hidden_field_tag "#{id_base}[id]", creator.id %>
+     <% is_readonly = true %>
   <% end %>
  
   <div class="well creator_inputs">
@@ -18,6 +19,7 @@
   <%= text_field_tag first_name_id,
     creator.first_name,
     required: false,
+    readonly: is_readonly, 
     id: first_name_id,
     class: 'form-control string required creator-first-name creator' %>
 
@@ -26,6 +28,8 @@
   <%= text_field_tag last_name_id,
     creator.last_name,
     required: false,
+    readonly: is_readonly,  
+    options: [readonly: true], 
     id: last_name_id,
       class: 'form-control string required creator-last-name creator' %>
   </div>
