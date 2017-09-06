@@ -26,7 +26,7 @@ class Ability
   end
 
   def registered?
-    current_user.group_list.include? 'registered' or 'umg/up.dlt.scholarsphere-users'
+    user_groups.include? 'registered'
   end
 
   # Remove if/when projecthydra/curation_concerns#1118 is resolved
@@ -35,8 +35,6 @@ class Ability
   end
 
   def registered_users_can_search_persons
-    if registered?
-      can :name_query, Person
-    end
+    can :name_query, Person if registered?
   end
 end
