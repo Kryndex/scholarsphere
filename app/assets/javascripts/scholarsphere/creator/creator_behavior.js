@@ -12,7 +12,7 @@ var CreatorBehavior = {
     })
   },
   activateRemoveButton: function () {
-    $('.base-terms').on('click', '.remove-creator', function () {
+    $('.creator_inputs').on('click', '.remove-creator', function () {
         $(this).parent().remove()
     })
   }
