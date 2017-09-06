@@ -15,7 +15,7 @@
   <div class="well creator_inputs">
     <button type="button" class="btn btn-link remove remove-creator"><span class="glyphicon glyphicon-remove"></span><span class="controls-remove-text">Remove</span></button>
   <% first_name_id = "#{id_base}[first_name]" %>
-  <%= label_tag first_name_id, 'First Name' %>
+  <%= label_tag first_name_id, 'Given Name' %>
   <%= text_field_tag first_name_id,
     creator.first_name,
     required: false,
