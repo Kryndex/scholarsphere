@@ -54,6 +54,7 @@ group :development, :test do
   gem 'rubocop-rspec'
   gem 'solr_wrapper'
   gem 'sqlite3'
+  gem 'capybara-screenshot'
 end
 
 group :development do
@@ -74,7 +75,6 @@ end
 
 group :test do
   gem 'capybara'
-  gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'equivalent-xml'
   gem 'factory_girl_rails', '~> 4.1'
@@ -87,6 +87,5 @@ end
 
 group :debug do
   gem 'byebug', require: false
-  gem 'capybara-screenshot'
   gem 'launchy'
 end
