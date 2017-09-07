@@ -77,7 +77,7 @@ describe GenericWork do
       end
     end
 
-    # There are many places in both scholarsphere and sufia that use the 'creator' method (instead of 'creators'), so make sure it exists.
+    # When we changed the work's creators to be a Person model instead of a String, the name of the method to find the work's creators also changed.  It is now 'work.creators' (with an 's') instead of 'work.creator'.  But, there are many places in in scholarsphere, sufia, and curation_concerns that call the 'creator' method, so we need to make sure that method exists.  So we just aliased the method 'creator' to 'creators'.
     context 'calling "creator" method' do
       let(:work) { create(:work, creators: [frodo]) }
       let!(:frodo) { create(:person, first_name: 'Frodo') }

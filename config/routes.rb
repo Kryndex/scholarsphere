@@ -16,8 +16,6 @@ ScholarSphere::Application.routes.draw do
   mount Qa::Engine => '/authorities'
 
   curation_concerns_collections
-  curation_concerns_basic_routes do
-  end
   curation_concerns_embargo_management
   concern :exportable, Blacklight::Routes::Exportable.new
   concern :searchable, Blacklight::Routes::Searchable.new
@@ -79,7 +77,7 @@ ScholarSphere::Application.routes.draw do
 
   get 'about' => 'static#about', id: 'about_page'
 
-  # Routes for looking a Person
+  # Routes for looking up Person records
   get '/creators/name_query', to: 'persons#name_query'
 
   # This must be the very last route in the file because it has a catch-all route for 404 errors.

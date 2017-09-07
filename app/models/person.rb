@@ -9,6 +9,7 @@ class Person < ActiveFedora::Base
     index.as :stored_searchable, :symbol
   end
 
+  # If ID exists, match on ID, else try to match name
   def self.find_or_create(attributes)
     attributes = attributes.with_indifferent_access
     attributes.delete(:id) if attributes[:id].blank?
@@ -16,7 +17,6 @@ class Person < ActiveFedora::Base
                     {
                       first_name_ssim: attributes[:first_name],
                       last_name_ssim: attributes[:last_name]
-                      # TODO: Match middle initial too?
                     }
                   else
                     { id: attributes[:id] }
