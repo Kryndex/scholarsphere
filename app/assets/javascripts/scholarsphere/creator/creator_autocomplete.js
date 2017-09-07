@@ -7,9 +7,9 @@ var creatorAutocomplete = {
     this.nameQuery = new Bloodhound({
       datumTokenizer: Bloodhound.tokenizers.obj.whitespace('first_name_tesim','last_name_tesim'),
       queryTokenizer: Bloodhound.tokenizers.whitespace,
-      limit:10,      
+      limit: 10,
       remote: {
-        url: '../../creators/name_query?q=%QUERY',
+        url: '/creators/name_query?q=%QUERY',
         wildcard: '%QUERY'
       }
     })
