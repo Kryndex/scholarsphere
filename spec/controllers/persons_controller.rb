@@ -5,24 +5,23 @@ include Warden::Test::Helpers
 
 RSpec.describe PersonsController do
   context 'a logged in user' do
+    before { Person.destroy_all }
+    
     let(:user) { create(:user, display_name: 'First User') }
-
+    let!(:jamie) { create(:person, first_name: 'Jamie', last_name: 'Test') }
+    let!(:sally) { create(:person, first_name: 'Sally', last_name: 'James') }
+    let!(:sal) { create(:person, first_name: 'Sal', last_name: 'Anderson') }
+    
     describe 'GET name_search' do
       before do
-        login_as user
-        request.headers['REMOTE_USER'] = 'user1000'
-        p = Person.new(first_name: 'Testing', last_name: 'Person')
-        p.save!
+        allow_any_instance_of(Devise::Strategies::HttpHeaderAuthenticatable).to receive(:remote_user).and_return(user.login)
+        allow_any_instance_of(User).to receive(:groups).and_return(['registered'])
       end
       it 'returns JSON search based on the first name & last name' do
-        get :name_query, params: { q: 'Testing' }
+        get :name_query, { q: 'Jam' }
         results = JSON.parse(response.body)
-        expect(results[0]['first_name_tesim']).to eq(['Testing'])
-      end
-      it 'returns JSON search based on the first name' do
-        get :name_query, params: { q: 'Person' }
-        results = JSON.parse(response.body)
-        expect(results[0]['last_name_tesim']).to eq(['Person'])
+        expect(results.count).to eq(2)
+        expect(results.map { |x| x['first_name_tesim'] }.flatten).to contain_exactly('Jamie', 'Sally')
       end
     end
   end
