@@ -16,6 +16,7 @@
 //= require scholarsphere/layout
 //= require scholarsphere/thumbnails
 //= require scholarsphere/creator/creator
+//= require scholarsphere/creator/creator_index
 //= require scholarsphere/creator/creator_autocomplete
 //= require scholarsphere/creator/creator_behavior
 //= require mustache

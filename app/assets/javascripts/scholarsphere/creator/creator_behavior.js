@@ -5,7 +5,10 @@ var CreatorBehavior = {
   activateAddButton: function () {
     $('.add-creator').on('click', function () {
       var creator = Object.create(Creator)
-      creator.index = $('.creator_inputs').length
+
+      CreatorIndex.index += 1
+      creator.index = CreatorIndex.index
+
       var template = $('#creator_template').html()
       var render = Mustache.render(template, creator)
       $('.creator_container').append(render)
@@ -21,4 +24,5 @@ var CreatorBehavior = {
 Blacklight.onLoad(function () {
   CreatorBehavior.activateAddButton()
   CreatorBehavior.activateRemoveButton()
+  CreatorIndex.index = $('.creator_inputs').length - 1
 })
