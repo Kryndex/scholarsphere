@@ -1,4 +1,4 @@
-var creatorAutocomplete = {
+ScholarSphere.creatorAutocomplete = {
   /**
    * Object for setting up Typeahead and Bloodhound
    */
@@ -36,7 +36,7 @@ var creatorAutocomplete = {
   },
   typeaheadSelect: function (index) {
     $('#find_creator').bind('typeahead:select', function (ev, suggestion) {
-      var creator = Object.create(Creator)
+      var creator = Object.create(ScholarSphere.creator)
       creator.firstName = suggestion.first_name_tesim
       creator.lastName = suggestion.last_name_tesim
       creator.index = $('.creator_inputs').length
@@ -55,8 +55,8 @@ var creatorAutocomplete = {
 }
 
 Blacklight.onLoad(function () {
-  creatorAutocomplete.initBloodhound()
-  creatorAutocomplete.activateTypeahead()
-  creatorAutocomplete.typeaheadSelect()
-  creatorAutocomplete.typeaheadClose()
+  ScholarSphere.creatorAutocomplete.initBloodhound()
+  ScholarSphere.creatorAutocomplete.activateTypeahead()
+  ScholarSphere.creatorAutocomplete.typeaheadSelect()
+  ScholarSphere.creatorAutocomplete.typeaheadClose()
 })

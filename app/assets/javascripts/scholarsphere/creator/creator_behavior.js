@@ -1,13 +1,13 @@
-var CreatorBehavior = {
+ScholarSphere.creatorBehavior = {
     /**
      * Object for activating add/remove functionality
      */
   activateAddButton: function () {
     $('.add-creator').on('click', function () {
-      var creator = Object.create(Creator)
+      var creator = Object.create(ScholarSphere.creator)
 
-      CreatorIndex.index += 1
-      creator.index = CreatorIndex.index
+      ScholarSphere.creatorIndex.index += 1
+      creator.index = ScholarSphere.creatorIndex.index
 
       var template = $('#creator_template').html()
       var render = Mustache.render(template, creator)
@@ -22,7 +22,7 @@ var CreatorBehavior = {
 }
 
 Blacklight.onLoad(function () {
-  CreatorBehavior.activateAddButton()
-  CreatorBehavior.activateRemoveButton()
-  CreatorIndex.index = $('.creator_inputs').length - 1
+  ScholarSphere.creatorBehavior.activateAddButton()
+  ScholarSphere.creatorBehavior.activateRemoveButton()
+  ScholarSphere.creatorIndex.index = $('.creator_inputs').length - 1
 })

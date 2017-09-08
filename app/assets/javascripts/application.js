@@ -12,6 +12,7 @@
 //= require blacklight_gallery
 //= require openseadragon
 //= require typeahead
+//= require scholarsphere/scholarsphere
 //= require scholarsphere/fileupload
 //= require scholarsphere/layout
 //= require scholarsphere/thumbnails

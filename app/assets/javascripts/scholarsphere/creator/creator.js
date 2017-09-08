@@ -1,4 +1,4 @@
-var Creator = {
+ScholarSphere.creator = {
   /**
    * Object that has the state and markup for the creator
    */
