@@ -25,16 +25,12 @@ class Ability
     current_user.administrator?
   end
 
-  def registered?
-    user_groups.include? 'registered'
-  end
-
   # Remove if/when projecthydra/curation_concerns#1118 is resolved
   def admins_can_read_solr_documents
     can :read, SolrDocument if admin?
   end
 
   def registered_users_can_search_persons
-    can :name_query, Person if registered?
+    can :name_query, Person if registered_user?
   end
 end
