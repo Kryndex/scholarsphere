@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class Person < ActiveFedora::Base
+  has_many :aliases
+
   property :given_name, predicate: ::RDF::Vocab::FOAF.firstName, multiple: false do |index|
     index.as :stored_searchable, :symbol
   end
@@ -9,6 +11,7 @@ class Person < ActiveFedora::Base
     index.as :stored_searchable, :symbol
   end
 
+  # @todo This may no longer be relevant now that Alias is linked to GenericWork
   # If ID exists, match on ID, else try to match name
   def self.find_or_create(attributes)
     attributes = attributes.with_indifferent_access
